@@ -1,0 +1,19 @@
+Hospital Management System Testing Report
+
+1. Backend Testing:
+Flask server successfully started.
+
+2. Frontend Testing:
+All pages loaded successfully.
+
+3. Integration Testing:
+Appointment form successfully sent patient data to backend.
+
+4. Database Testing:
+Patient details were stored and retrieved successfully.
+
+5. User Interface Testing:
+Navigation between Home, Doctors, Patients, and Appointment pages worked correctly.
+
+Result:
+All major functionalities of the Hospital Management System are working successfully.

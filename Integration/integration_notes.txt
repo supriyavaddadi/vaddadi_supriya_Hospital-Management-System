@@ -1,0 +1,42 @@
+Hospital Management System - Integration Details
+
+Frontend and Backend Integration:
+
+The frontend of the Hospital Management System is connected with the Flask backend using REST APIs.
+
+API Connections:
+
+1. Patient Registration
+
+Method:
+POST
+
+API:
+http://127.0.0.1:5000/register
+
+Purpose:
+Sends patient appointment details from appointment.html to Flask backend and stores data in SQLite database.
+
+
+2. Patient Records Display
+
+Method:
+GET
+
+API:
+http://127.0.0.1:5000/patients
+
+Purpose:
+Fetches registered patient details from the database and displays them in patient.html.
+
+
+Technologies Used:
+
+Frontend:
+HTML, CSS, JavaScript
+
+Backend:
+Python Flask
+
+Database:
+SQLite
