@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Patients Records</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>Patient Records</h1>
+
+<p>Registered Patient Information</p>
+
+</header>
+
+
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="doctors.html">Doctors</a>
+
+<a href="patients.html">Patients</a>
+
+<a href="appointments.html">Appointments</a>
+
+</nav>
+
+
+
+
+
+<section>
+
+<h2 class="title">
+Enrolled Patients
+</h2>
+
+
+
+
+<div class="cards" id="records">
+
+
+
+<div class="card">
+
+<h2>Patient ID: P001</h2>
+
+<p><b>Name:</b> Ramesh Kumar</p>
+
+<p><b>Age:</b> 45</p>
+
+<p><b>Disease:</b> Fever</p>
+
+<p><b>Doctor:</b> Dr. Ravi Kumar</p>
+
+<p><b>Village:</b> Nellore</p>
+
+<p><b>Contact:</b> 9876543210</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>Patient ID: P002</h2>
+
+<p><b>Name:</b> Lakshmi Devi</p>
+
+<p><b>Age:</b> 35</p>
+
+<p><b>Disease:</b> Diabetes</p>
+
+<p><b>Doctor:</b> Dr. Anitha</p>
+
+<p><b>Village:</b> Kavali</p>
+
+<p><b>Contact:</b> 9123456780</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>Patient ID: P003</h2>
+
+<p><b>Name:</b> Suresh</p>
+
+<p><b>Age:</b> 50</p>
+
+<p><b>Disease:</b> Bone Pain</p>
+
+<p><b>Doctor:</b> Dr. Suresh</p>
+
+<p><b>Village:</b> Gudur</p>
+
+<p><b>Contact:</b> 9988776655</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<script>
+
+
+let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+
+
+let records = document.getElementById("records");
+
+
+
+patients.forEach(function(patient,index){
+
+
+
+let card = document.createElement("div");
+
+card.className="card";
+
+
+
+card.innerHTML = `
+
+
+<h2>Patient ID: P00${index+4}</h2>
+
+
+<p><b>Name:</b> ${patient.name}</p>
+
+
+<p><b>Age:</b> ${patient.age}</p>
+
+
+<p><b>Gender:</b> ${patient.gender}</p>
+
+
+<p><b>Disease:</b> ${patient.problem}</p>
+
+
+<p><b>Doctor:</b> ${patient.doctor}</p>
+
+
+<p><b>Village:</b> ${patient.city}</p>
+
+
+<p><b>Contact:</b> ${patient.phone}</p>
+
+
+`;
+
+
+
+records.appendChild(card);
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
