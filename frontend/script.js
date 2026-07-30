@@ -1,169 +1,128 @@
-function bookAppointment(){
+function bookAppointment() {
 
+    let patient = {
 
-let patient = {
+        name: document.getElementById("name").value.trim(),
+        age: document.getElementById("age").value.trim(),
+        gender: document.getElementById("gender").value,
+        disease: document.getElementById("disease").value.trim(),
+        doctor: document.getElementById("doctor").value,
+        city: document.getElementById("city").value.trim(),
+        contact: document.getElementById("contact").value.trim()
 
+    };
 
-name: document.getElementById("name").value,
+    // Validation
+    if (
+        patient.name === "" ||
+        patient.age === "" ||
+        patient.gender === "" ||
+        patient.city === "" ||
+        patient.contact === "" ||
+        patient.disease === "" ||
+        patient.doctor === ""
+    ) {
+        alert("Please fill all the required fields.");
+        return;
+    }
 
-age: document.getElementById("age").value,
+    fetch("http://127.0.0.1:5000/register", {
 
-gender: document.getElementById("gender").value,
+        method: "POST",
 
-disease: document.getElementById("disease").value,
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-doctor: document.getElementById("doctor").value,
+        body: JSON.stringify(patient)
 
-city: document.getElementById("city").value,
+    })
 
-contact: document.getElementById("contact").value
+    .then(response => response.json())
 
+    .then(data => {
 
-};
+        alert(data.message);
 
+        // Reset all fields
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("gender").selectedIndex = 0;
+        document.getElementById("city").value = "";
+        document.getElementById("contact").value = "";
+        document.getElementById("disease").value = "";
+        document.getElementById("doctor").selectedIndex = 0;
+        document.getElementById("date").value = "";
+        document.getElementById("reason").value = "";
 
+    })
 
-if(patient.name=="" || patient.age=="" || patient.contact==""){
+    .catch(error => {
 
-alert("Please fill patient details");
+        console.log(error);
+        alert("Backend connection failed.");
 
-return;
-
-}
-
-
-
-fetch("http://127.0.0.1:5000/register",
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify(patient)
-
-
-})
-
-
-.then(response=>response.json())
-
-
-.then(data=>{
-
-
-alert(data.message);
-
-
-
-document.querySelectorAll("input,textarea").forEach(function(field){
-
-field.value="";
-
-});
-
-
-})
-
-
-
-.catch(error=>{
-
-
-console.log(error);
-
-alert("Backend connection failed");
-
-
-});
-
+    });
 
 }
 
 
 
+function loadPatients() {
 
+    fetch("http://127.0.0.1:5000/patients")
 
+    .then(response => response.json())
 
+    .then(data => {
 
-function loadPatients(){
+        let records = document.getElementById("records");
 
+        records.innerHTML = "";
 
+        if (data.length === 0) {
 
-fetch("http://127.0.0.1:5000/patients")
+            records.innerHTML = "<h2>No patients registered yet.</h2>";
+            return;
 
+        }
 
+        data.forEach(function(patient) {
 
-.then(response=>response.json())
+            let card = document.createElement("div");
 
+            card.className = "card";
 
+            card.innerHTML = `
 
-.then(data=>{
+            <h2>Patient ID : ${patient.id}</h2>
 
+            <p><b>Name :</b> ${patient.name}</p>
 
+            <p><b>Age :</b> ${patient.age}</p>
 
-let records=document.getElementById("records");
+            <p><b>Gender :</b> ${patient.gender}</p>
 
+            <p><b>Disease :</b> ${patient.disease}</p>
 
-records.innerHTML="";
+            <p><b>Doctor :</b> ${patient.doctor}</p>
 
+            <p><b>City :</b> ${patient.city}</p>
 
+            <p><b>Contact :</b> ${patient.contact}</p>
 
-data.forEach(function(patient){
+            `;
 
+            records.appendChild(card);
 
+        });
 
-let card=document.createElement("div");
+    })
 
+    .catch(error => {
 
-card.className="card";
+        console.log(error);
 
-
-
-card.innerHTML=`
-
-<h2>Patient ID: ${patient.id}</h2>
-
-<p><b>Name:</b> ${patient.name}</p>
-
-<p><b>Age:</b> ${patient.age}</p>
-
-<p><b>Gender:</b> ${patient.gender}</p>
-
-<p><b>Disease:</b> ${patient.disease}</p>
-
-<p><b>Doctor:</b> ${patient.doctor}</p>
-
-<p><b>Village:</b> ${patient.city}</p>
-
-<p><b>Contact:</b> ${patient.contact}</p>
-
-`;
-
-
-
-records.appendChild(card);
-
-
-
-});
-
-
-
-})
-
-
-.catch(error=>{
-
-
-console.log(error);
-
-
-});
-
+    });
 
 }
